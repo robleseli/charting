@@ -43,10 +43,30 @@ def submit_chart_data():
 
     # Button to save data
     tk.Button(input_window, text="Save", command=save_to_database).grid(row=3, columnspan=2)
+    
 
-# Function to display all records
+    # Function to display all records
 def display_records():
-    pass
+    # Open a new window for displaying records
+    display_window = tk.Toplevel()
+    display_window.title("Records")
+
+    # Connect to SQLite database
+    conn = sqlite3.connect("charts.db")
+    c = conn.cursor()
+
+    # Fetch all records from the database
+    c.execute("SELECT * FROM charts")
+    records = c.fetchall()
+
+    # Display records in a listbox or text widget
+    listbox = tk.Listbox(display_window, width=50)
+    for record in records:
+        listbox.insert(tk.END, f"Patient Name: {record[1]}, Age: {record[2]}, Symptoms: {record[3]}")
+    listbox.pack()
+
+    # Close database connection
+    conn.close()
 
 # Function to export chart
 def export_chart():
