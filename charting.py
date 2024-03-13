@@ -1,6 +1,7 @@
 import tkinter as tk
 import sqlite3
 from tkinter import messagebox
+import database_setup
 
 # Function to submit new chart data to database
 def submit_chart_data():
@@ -43,9 +44,8 @@ def submit_chart_data():
 
     # Button to save data
     tk.Button(input_window, text="Save", command=save_to_database).grid(row=3, columnspan=2)
-    
 
-    # Function to display all records
+# Function to display all records
 def display_records():
     # Open a new window for displaying records
     display_window = tk.Toplevel()
